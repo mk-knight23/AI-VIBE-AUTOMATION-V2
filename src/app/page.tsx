@@ -1,10 +1,15 @@
+import prisma from "@/lib/db";
 import { cn } from "@/lib/utils";
 
-const page = () => {
-  const something = true;
-  return <div className={cn("text-red-500", {"text-green-500": something})}>    
-    Welcome to the Home Page
-  </div>;
+const Page = async () => {
+  const users = await prisma.user.findMany();
+
+  return (
+    <div className={cn("text-red-500", { "text-green-500": false })}>
+      {JSON.stringify(users)}
+      <h1>Hello World </h1>
+    </div>
+  );
 };
 
-export default page; 
+export default Page;
