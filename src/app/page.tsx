@@ -1,13 +1,17 @@
-import prisma from "@/lib/db";
-import { cn } from "@/lib/utils";
+import { requireAuth } from "@/lib/auth-utils";
+import { caller } from "@/app/api/trpc/server";
+import { LogoutButton } from "./logout";
 
 const Page = async () => {
-  const users = await prisma.user.findMany();
+  await requireAuth();
+  const data = await caller.getUsers();
 
   return (
-    <div className={cn("text-red-500", { "text-green-500": false })}>
-      {JSON.stringify(users)}
-      My Main Page 
+    <div className="min-h-screen min-w-screen flex
+items-center justify-center flex-col gap-y-6">
+      protected server component
+      <div>{JSON.stringify(data, null, 2)}</div>
+      <LogoutButton />
     </div>
   );
 };
