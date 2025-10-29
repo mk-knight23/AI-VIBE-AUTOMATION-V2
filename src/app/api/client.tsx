@@ -1,5 +1,5 @@
 "use client";
-import { useTRPC } from "@/app/api/trpc/client";
+import { useTRPC } from "../../../src/app/api/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 export const Client = () => {
     const trpc = useTRPC();
