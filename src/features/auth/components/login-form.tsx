@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShimmerButton } from "../../../components/ui/shimmer-button";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { authClient } from "@/lib/auth-client";
 
 const loginSchema = z.object({
@@ -50,7 +50,7 @@ export function LoginForm() {
     const isPending = form.formState.isSubmitting;
 
     return (
-        <div className="flex flex-col gap-6 max-w-md mx-auto mt-32 w-1/4">
+        <div className="flex flex-col gap-6 mx-auto min-w-sm">
             <Card>
                 <CardHeader className="text-center">
                     <CardTitle>Welcome back</CardTitle>
@@ -65,12 +65,18 @@ export function LoginForm() {
                                         className="w-full cursor-pointer"
                                         type="button"
                                         disabled={isPending}
-                                    >Continue with GitHub</Button>
+                                    >
+                                        <Image src="/logos/github.svg" alt="GitHub" width={22} height={22} />
+                                        Continue with GitHub
+                                    </Button>
                                     <Button variant="outline"
                                         className="w-full cursor-pointer"
                                         type="button"
                                         disabled={isPending}
-                                    >Continue with Google</Button>
+                                    >
+                                        <Image src="/logos/google.svg" alt="Google" width={20} height={20} />
+                                        Continue with Google
+                                    </Button>
                                 </div>
                                 <div className="grid gap-6 w-full">
                                     <FormField
