@@ -7,7 +7,7 @@ const Page = async () => {
   return (
     <div className={cn("text-red-500", { "text-green-500": false })}>
       {JSON.stringify(users)}
-      <h1>Hello World </h1>
+      My Main Page 
     </div>
   );
 };
