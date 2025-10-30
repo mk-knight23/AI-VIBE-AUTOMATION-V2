@@ -1,0 +1,28 @@
+;!function(){try { var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:{},n=(new e.Error).stack;n&&((e._debugIds|| (e._debugIds={}))[n]="a3e9a6ad-f862-5264-411b-f7bef61cb329")}catch(e){}}();
+module.exports = [
+"[project]/Downloads/nodebase-main/node_modules/@apm-js-collab/code-transformer/index.js [instrumentation] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.create = create;
+// ./pkg/orchestrion_js.js has a side effect of loading the wasm binary. 
+// We only want that if the library is actually used!
+var cachedCreate;
+/**
+ * Create a new instrumentation matcher from an array of instrumentation configs.
+ */ function create(configs, dc_module) {
+    if (!cachedCreate) {
+        cachedCreate = __turbopack_context__.r("[project]/Downloads/nodebase-main/node_modules/@apm-js-collab/code-transformer/pkg/orchestrion_js.js [instrumentation] (ecmascript)").create;
+    }
+    if (cachedCreate === undefined) {
+        throw new Error("Failed to load '@apm-js-collab/code-transformer'");
+    }
+    return cachedCreate(configs, dc_module);
+}
+}),
+];
+
+//# debugId=a3e9a6ad-f862-5264-411b-f7bef61cb329
+//# sourceMappingURL=6ec0f_%40apm-js-collab_code-transformer_index_8aac0f0c.js.map

@@ -1,0 +1,20 @@
+(globalThis.TURBOPACK_CHUNK_LISTS || (globalThis.TURBOPACK_CHUNK_LISTS = [])).push({
+    script: typeof document === "object" ? document.currentScript : undefined,
+    chunks: [
+  "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_cc3cccc5._.js",
+  "static/chunks/6ec0f_next_dist_compiled_react-dom_4f5d7359._.js",
+  "static/chunks/6ec0f_next_dist_compiled_next-devtools_index_e9a30ea0.js",
+  "static/chunks/6ec0f_next_dist_compiled_15ae87d6._.js",
+  "static/chunks/6ec0f_next_dist_client_5fa51116._.js",
+  "static/chunks/6ec0f_next_dist_shared_lib_8afda5d9._.js",
+  "static/chunks/6ec0f_next_dist_33f6a9fa._.js",
+  "static/chunks/6ec0f_next_router_11a554ff.js",
+  "static/chunks/6ec0f_@sentry_core_build_esm_0cbaf91f._.js",
+  "static/chunks/6ec0f_@sentry_browser_build_npm_esm_c029b8c3._.js",
+  "static/chunks/6ec0f_@sentry-internal_browser-utils_build_esm_d2659c39._.js",
+  "static/chunks/6ec0f_@sentry-internal_replay_build_npm_esm_index_b5fb4825.js",
+  "static/chunks/6ec0f_1dbec6c7._.js",
+  "static/chunks/Downloads_nodebase-main_instrumentation-client_ts_6e1ff4e4._.js"
+],
+    source: "entry"
+});

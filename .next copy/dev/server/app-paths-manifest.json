@@ -1,0 +1,8 @@
+{
+  "/(dashboard)/(editor)/workflows/[workflowId]/page": "app/(dashboard)/(editor)/workflows/[workflowId]/page.js",
+  "/(dashboard)/(rest)/credentials/page": "app/(dashboard)/(rest)/credentials/page.js",
+  "/(dashboard)/(rest)/executions/page": "app/(dashboard)/(rest)/executions/page.js",
+  "/(dashboard)/(rest)/workflows/page": "app/(dashboard)/(rest)/workflows/page.js",
+  "/api/auth/[...all]/route": "app/api/auth/[...all]/route.js",
+  "/api/trpc/[trpc]/route": "app/api/trpc/[trpc]/route.js"
+}

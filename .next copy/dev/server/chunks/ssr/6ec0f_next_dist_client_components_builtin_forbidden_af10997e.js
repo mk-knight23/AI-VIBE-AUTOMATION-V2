@@ -1,0 +1,34 @@
+;!function(){try { var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:{},n=(new e.Error).stack;n&&((e._debugIds|| (e._debugIds={}))[n]="3f39e1b4-a953-a35d-747b-80cc68462c6d")}catch(e){}}();
+module.exports = [
+"[project]/Downloads/nodebase-main/node_modules/next/dist/client/components/builtin/forbidden.js [app-rsc] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return Forbidden;
+    }
+});
+const _jsxruntime = __turbopack_context__.r("[project]/Downloads/nodebase-main/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-runtime.js [app-rsc] (ecmascript)");
+const _errorfallback = __turbopack_context__.r("[project]/Downloads/nodebase-main/node_modules/next/dist/client/components/http-access-fallback/error-fallback.js [app-rsc] (ecmascript)");
+function Forbidden() {
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_errorfallback.HTTPAccessErrorFallback, {
+        status: 403,
+        message: "This page could not be accessed."
+    });
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+    Object.defineProperty(exports.default, '__esModule', {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=forbidden.js.map
+}),
+];
+
+//# debugId=3f39e1b4-a953-a35d-747b-80cc68462c6d
+//# sourceMappingURL=6ec0f_next_dist_client_components_builtin_forbidden_af10997e.js.map

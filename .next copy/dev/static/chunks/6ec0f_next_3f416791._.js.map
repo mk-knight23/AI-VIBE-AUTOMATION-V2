@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "debugId": "0bc7e877-dc90-b9bb-fccb-68b3e9fce888",
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/mkazi/Downloads/nodebase-main/node_modules/next/router.js"],"sourcesContent":["module.exports = require('./dist/client/router')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0],"debugId":null}},
+    {"offset": {"line": 8, "column": 0}, "map": {"version":3,"sources":["file:///Users/mkazi/Downloads/nodebase-main/node_modules/next/app.js"],"sourcesContent":["module.exports = require('./dist/pages/_app')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0],"debugId":null}}]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/mkazi/Downloads/nodebase-main/components/app-header.tsx"],"sourcesContent":["import { SidebarTrigger } from \"@/components/ui/sidebar\";\n\nexport const AppHeader = () => {\n  return (\n    <header className=\"flex h-14 shrink-0 items-center gap-2 border-b px-4 bg-background\">\n      <SidebarTrigger />\n    </header>\n  );\n};\n"],"names":[],"mappings":";;;;;AAAA;;;AAEO,MAAM,YAAY;IACvB,qBACE,+QAAC;QAAO,WAAU;kBAChB,cAAA,+QAAC,+KAAc;;;;;;;;;;AAGrB","debugId":null}},
+    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":["file:///Users/mkazi/Downloads/nodebase-main/app/%28dashboard%29/%28rest%29/layout.tsx"],"sourcesContent":["import { AppHeader } from \"@/components/app-header\";\n\nconst Layout = ({ children }: { children: React.ReactNode }) => {\n  return (\n    <>\n    <AppHeader />\n    <main className=\"flex-1\">{children}</main>\n    </>\n  );\n};\n\nexport default Layout;\n"],"names":[],"mappings":";;;;;AAAA;;;AAEA,MAAM,SAAS,CAAC,EAAE,QAAQ,EAAiC;IACzD,qBACE;;0BACA,+QAAC,0KAAS;;;;;0BACV,+QAAC;gBAAK,WAAU;0BAAU;;;;;;;;AAG9B;uCAEe","debugId":null}}]
+}
