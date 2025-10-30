@@ -4,3 +4,4 @@ procs:
 
 next:
   cmd: ["bun", "run", "dev"]
+
