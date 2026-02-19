@@ -8,6 +8,23 @@ import { Node, Edge } from "@xyflow/react";
 import { Prisma } from "@/lib/generated/prisma";
 import { NodeType } from "@/lib/generated/prisma";
 
+/**
+ * Safe JSON value schema for workflow node data
+ * Prevents arbitrary code execution through z.any()
+ */
+const safeJsonValueSchema: z.ZodType<Record<string, unknown>> = z.lazy(() =>
+  z.record(
+    z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.null(),
+      z.array(safeJsonValueSchema),
+      safeJsonValueSchema,
+    ]),
+  ),
+);
+
 export const workFlowRouter = createTRPCRouter({
   create: protectedProcedure.mutation(({ ctx }) => {
     return prisma.workflow.create({
@@ -44,10 +61,10 @@ export const workFlowRouter = createTRPCRouter({
             id: z.string(),
             type: z.string().nullish(),
             position: z.object({ x: z.number(), y: z.number() }),
-            data: z.record(z.string(), z.any()).optional(),
-          })
+            data: safeJsonValueSchema.optional(),
+          }),
         ),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       const { id, nodes } = input;
@@ -108,8 +125,8 @@ export const workFlowRouter = createTRPCRouter({
             id: z.string(),
             type: z.string().nullish(),
             position: z.object({ x: z.number(), y: z.number() }),
-            data: z.record(z.string(), z.any()).optional(),
-          })
+            data: safeJsonValueSchema.optional(),
+          }),
         ),
         edges: z.array(
           z.object({
@@ -117,9 +134,9 @@ export const workFlowRouter = createTRPCRouter({
             target: z.string(),
             sourceHandle: z.string().nullish(),
             targetHandle: z.string().nullish(),
-          })
+          }),
         ),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       const { id, nodes, edges } = input;
@@ -217,7 +234,7 @@ export const workFlowRouter = createTRPCRouter({
           .max(PAGINATION.MAX_PAGE_SIZE)
           .default(PAGINATION.DEFAULT_PAGE_SIZE),
         search: z.string().default(""),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const { page, pageSize, search } = input;

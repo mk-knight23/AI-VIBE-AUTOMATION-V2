@@ -13,15 +13,15 @@ function validateAuthEnvironment() {
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_URL",
     "NEXT_PUBLIC_BETTER_AUTH_URL",
-    "DATABASE_URL"
+    "DATABASE_URL",
   ];
 
-  const missing = required.filter(key => !process.env[key]);
+  const missing = required.filter((key) => !process.env[key]);
 
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variables: ${missing.join(", ")}. ` +
-      "Please check your .env.local file and ensure all required variables are set."
+        "Please check your .env.local file and ensure all required variables are set.",
     );
   }
 
@@ -32,29 +32,54 @@ function validateAuthEnvironment() {
   } catch {
     throw new Error(
       "BETTER_AUTH_URL and NEXT_PUBLIC_BETTER_AUTH_URL must be valid URLs. " +
-      "Example: http://localhost:3000"
+        "Example: http://localhost:3000",
     );
   }
 
   // Validate social providers if any are configured
   const socialProviders = [
-    { name: "GitHub", clientId: "GITHUB_CLIENT_ID", clientSecret: "GITHUB_CLIENT_SECRET" },
-    { name: "Google", clientId: "GOOGLE_CLIENT_ID", clientSecret: "GOOGLE_CLIENT_SECRET" },
+    {
+      name: "GitHub",
+      clientId: "GITHUB_CLIENT_ID",
+      clientSecret: "GITHUB_CLIENT_SECRET",
+    },
+    {
+      name: "Google",
+      clientId: "GOOGLE_CLIENT_ID",
+      clientSecret: "GOOGLE_CLIENT_SECRET",
+    },
   ];
 
-  socialProviders.forEach(provider => {
+  socialProviders.forEach((provider) => {
     if (process.env[provider.clientId] && !process.env[provider.clientSecret]) {
-      console.warn(`⚠️  ${provider.name} client ID is set but client secret is missing`);
-    } else if (process.env[provider.clientSecret] && !process.env[provider.clientId]) {
-      console.warn(`⚠️  ${provider.name} client secret is set but client ID is missing`);
+      console.warn(
+        `⚠️  ${provider.name} client ID is set but client secret is missing`,
+      );
+    } else if (
+      process.env[provider.clientSecret] &&
+      !process.env[provider.clientId]
+    ) {
+      console.warn(
+        `⚠️  ${provider.name} client secret is set but client ID is missing`,
+      );
     }
   });
 
-  // Validate Polar configuration if Polar is enabled
+  // Validate Polar product ID if Polar is configured
   if (polarConfig.isConfigured) {
-    console.log(`✅ Polar integration configured for ${polarConfig.environment} environment`);
+    if (!process.env.POLAR_PRODUCT_ID) {
+      throw new Error(
+        "POLAR_PRODUCT_ID environment variable is required when Polar is configured. " +
+          "Please set it in your .env.local file.",
+      );
+    }
+    console.log(
+      `✅ Polar integration configured for ${polarConfig.environment} environment`,
+    );
   } else {
-    console.warn("⚠️  Polar integration not configured (POLAR_ACCESS_TOKEN not set)");
+    console.warn(
+      "⚠️  Polar integration not configured (POLAR_ACCESS_TOKEN not set)",
+    );
   }
 }
 
@@ -79,25 +104,29 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
   },
-  plugins: polarConfig.isConfigured ? [
-    polar({
-      client: polarClient,
-      createCustomerOnSignUp: false, // Disable automatic creation
-      use: [
-        checkout({
-          products: [
-            {
-              productId: "f56e5c88-21e1-457f-9d46-10f526c69afe",
-              slug: "pro",
-            },
+  plugins: polarConfig.isConfigured
+    ? [
+        polar({
+          client: polarClient,
+          createCustomerOnSignUp: false, // Disable automatic creation
+          use: [
+            checkout({
+              products: [
+                {
+                  productId: process.env.POLAR_PRODUCT_ID!,
+                  slug: "pro",
+                },
+              ],
+              successUrl:
+                polarConfig.successUrl ||
+                `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/dashboard`,
+              authenticatedUsersOnly: true,
+            }),
+            portal(),
           ],
-          successUrl: polarConfig.successUrl || `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/dashboard`,
-          authenticatedUsersOnly: true,
         }),
-        portal(),
-      ],
-    }),
-  ] : [], // No plugins if Polar not configured
+      ]
+    : [], // No plugins if Polar not configured
   // Global error handler for API errors
   onAPIError: {
     throw: true,

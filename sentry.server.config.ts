@@ -4,16 +4,33 @@
 
 import * as Sentry from "@sentry/nextjs";
 
-Sentry.init({
-  dsn: "https://47ff7ca66ceb3c222ed20028486ae0d0@o4510277666406400.ingest.us.sentry.io/4510277667323904",
+// Only initialize Sentry if DSN is provided
+const SENTRY_DSN = process.env.SENTRY_DSN;
 
-  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-  tracesSampleRate: 1,
+if (SENTRY_DSN) {
+  Sentry.init({
+    dsn: SENTRY_DSN,
 
-  // Enable logs to be sent to Sentry
-  enableLogs: true,
+    // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
+    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1,
 
-  // Enable sending user PII (Personally Identifiable Information)
-  // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#sendDefaultPii
-  sendDefaultPii: true,
-});
+    // Enable logs to be sent to Sentry
+    enableLogs: process.env.NODE_ENV === "production",
+
+    // Disable sending user PII in production (security best practice)
+    sendDefaultPii: false,
+
+    // Filter sensitive data
+    beforeSend(event, hint) {
+      // Remove potential sensitive data from headers
+      if (event.request?.headers) {
+        delete event.request.headers["authorization"];
+        delete event.request.headers["cookie"];
+        delete event.request.headers["x-api-key"];
+      }
+      return event;
+    },
+  });
+} else if (process.env.NODE_ENV === "production") {
+  console.warn("SENTRY_DSN not configured - error tracking disabled");
+}
