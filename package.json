@@ -1,6 +1,7 @@
 {
   "name": "n8n",
   "version": "0.1.0",
+  "description": "Scalable, type-safe workflow automation engine inspired by n8n, built with Next.js 15, tRPC, and Prisma.",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
